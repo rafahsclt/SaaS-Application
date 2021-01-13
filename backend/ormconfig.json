@@ -4,7 +4,7 @@
     "port": 5432,
     "username": "postgres",
     "password": "docker",
-		"database": "nome",
+		"database": "saas_db",
 		"migrations": [
         "./src/database/migrations/*.ts"
     ],
