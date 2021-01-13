@@ -1,11 +1,44 @@
-import {MigrationInterface, QueryRunner} from "typeorm";
+import {MigrationInterface, QueryRunner, Table} from "typeorm"
 
 export class CreateProjects1610576399568 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.createTable(new Table({
+            name: 'projects',
+            columns: [
+                {
+                    name: 'id',
+                    type: 'uuid',
+                    isPrimary: true,
+                    generationStrategy: 'uuid',
+                    default: 'uuid_generate_v4()'
+                }, 
+                {
+                    name: 'title',
+                    type: 'varchar',
+                    isNullable: false
+                },
+                {
+                    name: 'team_id',
+                    type: 'uuid',
+                    unsigned: true,
+                    isNullable: false
+                }
+            ],
+            foreignKeys: [
+                {
+                    name: 'TeamProject',
+                    columnNames: ['team_id'],
+                    referencedTableName: 'teams',
+                    referencedColumnNames: ['id'],
+                    onDelete: 'CASCADE',
+                    onUpdate: 'CASCADE'
+                }
+            ]
+        }))
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.dropTable('projects')
     }
-
 }

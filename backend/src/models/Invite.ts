@@ -14,6 +14,9 @@ class Invite {
     @Column()
     team_id: string
 
+    @Column()
+    email: string
+
     @OneToMany(() => User, user => user.invites)
     @JoinColumn({ name: 'user_id' })
     user: User
