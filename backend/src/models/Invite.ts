@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn, OneToMany, JoinColumn } from 'typeorm'
+import { Column, Entity, PrimaryGeneratedColumn, OneToMany, JoinColumn, ManyToOne } from 'typeorm'
 
 import User from './User'
 import Team from './Team'
@@ -17,7 +17,7 @@ class Invite {
     @Column()
     email: string
 
-    @OneToMany(() => User, user => user.invites)
+    @ManyToOne(() => User, user => user.invites)
     @JoinColumn({ name: 'user_id' })
     user: User
 

@@ -14,16 +14,28 @@ export class CreateTeams1610576394269 implements MigrationInterface {
                     default: 'uuid_generate_v4()'
                 }, 
                 {
+                    name: 'user_id',
+                    type: 'uuid'
+                },
+                {
                     name: 'name',
-                    type: 'varchar',
-                    isNullable: false
+                    type: 'varchar'
                 },
                 {
                     name: 'slug',
                     type: 'varchar',
-                    isNullable: false,
                     isUnique: true
                 }
+            ],
+            foreignKeys: [
+               {
+                   name: 'OwnerTeam',
+                   columnNames: ['user_id'],
+                   referencedTableName: 'users',
+                   referencedColumnNames: ['id'],
+                   onDelete: 'CASCADE',
+                   onUpdate: 'CASCADE'
+               } 
             ]
         }))
     }

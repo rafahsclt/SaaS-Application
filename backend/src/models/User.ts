@@ -1,6 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, OneToMany } from 'typeorm'
+import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from 'typeorm'
 
 import Invite from './Invite'
+import Team from './Team'
 import UserTeam from './UserTeam'
 
 @Entity('users')
@@ -16,6 +17,12 @@ class User {
     
     @Column()
     email: string
+
+    @OneToMany(() => Team, team => team.user)
+    teams: Team[]
+
+    @OneToMany(() => Invite, invite => invite.user)
+    invites: Invite[]
 
     @OneToMany(() => UserTeam, userTeam => userTeam.user)
     public user_teams!: UserTeam[]

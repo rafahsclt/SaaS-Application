@@ -1,7 +1,8 @@
-import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, OneToMany } from 'typeorm'
+import { Column, Entity, PrimaryGeneratedColumn, OneToMany, ManyToOne, JoinColumn } from 'typeorm'
 
 import Invite from './Invite'
 import Project from './Project'
+import User from './User'
 import UserTeam from './UserTeam'
 
 @Entity('teams')
@@ -15,7 +16,14 @@ class Team {
     @Column()
     slug: string
 
-    @ManyToOne(() => Invite, invite => invite.team)
+    @Column()
+    user_id: string
+
+    @ManyToOne(() => User, user => user.teams)
+    @JoinColumn({ name: 'user_id' })
+    user: User
+
+    @OneToMany(() => Invite, invite => invite.team)
     invites: Invite[]
 
     @OneToMany(() => Project, project => project.team)

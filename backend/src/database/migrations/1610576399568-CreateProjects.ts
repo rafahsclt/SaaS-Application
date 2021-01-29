@@ -15,14 +15,12 @@ export class CreateProjects1610576399568 implements MigrationInterface {
                 }, 
                 {
                     name: 'title',
-                    type: 'varchar',
-                    isNullable: false
+                    type: 'varchar'
                 },
                 {
                     name: 'team_id',
                     type: 'uuid',
-                    unsigned: true,
-                    isNullable: false
+                    unsigned: true
                 }
             ],
             foreignKeys: [

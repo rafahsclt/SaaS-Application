@@ -3,6 +3,7 @@ import { compare } from 'bcryptjs'
 import { sign } from 'jsonwebtoken'
 
 import User from '../models/User'
+import authConfig from '../config/auth'
 
 interface IRequest {
     email: string
@@ -26,9 +27,9 @@ class AuthenticateUserService {
 
         const passwordMatched = compare(password, user.password)
 
-        const token = sign({}, 'saas', {
+        const token = sign({}, authConfig.jwt.secret , {
             subject: user.id,
-            expiresIn: '1d'
+            expiresIn: authConfig.jwt.expiresIn
         })
 
         if(!passwordMatched) throw new Error("Incorrect email/password combination")
