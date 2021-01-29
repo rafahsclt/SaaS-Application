@@ -17,9 +17,6 @@ class User {
     @Column()
     email: string
 
-    @ManyToOne(() => Invite, invite => invite.user)
-    invites: Invite[]
-
     @OneToMany(() => UserTeam, userTeam => userTeam.user)
     public user_teams!: UserTeam[]
 }

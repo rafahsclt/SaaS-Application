@@ -1,9 +1,11 @@
 import { Router } from 'express'
 
-import userRouter from './userRouter'
+import usersRouter from './users.routes'
+import sessionsRouter from './sessions.routes'
 
 const routes = Router()
 
-routes.use('/user', userRouter)
+routes.use('/users', usersRouter)
+routes.use('/sessions', sessionsRouter)
 
 export default routes

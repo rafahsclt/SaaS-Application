@@ -4,8 +4,11 @@
     "port": 5432,
     "username": "postgres",
     "password": "docker",
-		"database": "saas_db",
-		"migrations": [
+    "database": "saas_db",
+    "entities": [
+        "./src/models/*.ts"
+    ],
+	"migrations": [
         "./src/database/migrations/*.ts"
     ],
     "cli": {
