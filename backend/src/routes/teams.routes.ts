@@ -10,5 +10,7 @@ teamsRouter.use(ensureAuthenticated)
 
 teamsRouter.post('/', teamsController.create)
 teamsRouter.get('/:id', teamsController.show)
+teamsRouter.patch('/:id', teamsController.update)
+teamsRouter.delete('/:id', teamsController.destroy)
 
 export default teamsRouter

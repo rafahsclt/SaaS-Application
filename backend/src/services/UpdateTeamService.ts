@@ -21,6 +21,17 @@ class UpdateTeamService {
         })
 
         if(!team) throw new Error('This team does not exist')
+
+        const slugAlreadyExist = await teamsRepository.findOne({
+            where: { slug }
+        })
+
+        if(slugAlreadyExist && slugAlreadyExist.id !== team_id) throw new Error('This slug already in use')
+
+        team.name = name
+        team.slug = slug
+
+        await teamsRepository.save(team)
         
         return { team }
     }
