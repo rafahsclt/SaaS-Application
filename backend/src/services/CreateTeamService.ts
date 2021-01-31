@@ -1,6 +1,6 @@
 import { getRepository } from 'typeorm'
 
-import Team from '../models/Team'
+import Team from 'models/Team'
 
 interface IRequest {
     user_id: string
