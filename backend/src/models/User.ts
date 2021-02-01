@@ -24,8 +24,8 @@ class User {
     @OneToMany(() => Invite, invite => invite.user)
     invites: Invite[]
 
-    @OneToMany(() => UserTeam, userTeam => userTeam.user)
-    public user_teams!: UserTeam[]
+    @OneToMany(() => UserTeam, userTeam => userTeam.user, { cascade: true })
+    user_teams: UserTeam[]
 }
 
 export default User

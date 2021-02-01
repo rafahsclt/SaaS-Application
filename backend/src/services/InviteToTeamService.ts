@@ -27,8 +27,7 @@ class InviteToTeamService {
         data.forEach(async (invite) => {
             const inv = invitesRepository.create(invite)
 
-            // await invitesRepository.save(inv)
-            console.log(inv)
+            await invitesRepository.save(inv)
         })
 
         return data

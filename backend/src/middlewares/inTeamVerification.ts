@@ -9,11 +9,22 @@ export default async function inTeamVerification(request: Request, response: Res
 
     const teamsRepository = getRepository(Team)
 
-    if(slug) {
-        const team = await teamsRepository.findOne({ where: { slug } })
+    let team = null
+    let inTheTeam = false
 
-        console.log(team.user)
+    if(slug) {
+        team = await teamsRepository.findOne({ where: { slug }, relations: ['user_teams'] })
+
+        if(!team) return response.status(401).send()
+
+        inTheTeam = team.user_teams.some(userTeam => userTeam.user_id === user_id)
     } 
+
+    if(!inTheTeam) return response.status(401).send()
+
+    request.team = {
+        id: team.id
+    }
         
     next()
 }

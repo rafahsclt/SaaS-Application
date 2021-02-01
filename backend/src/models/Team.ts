@@ -16,9 +16,6 @@ class Team {
     @Column()
     slug: string
 
-    @Column()
-    user_id: string
-
     @ManyToOne(() => User, user => user.teams)
     @JoinColumn({ name: 'user_id' })
     user: User
@@ -29,8 +26,8 @@ class Team {
     @OneToMany(() => Project, project => project.team)
     projects: Project[]
 
-    @OneToMany(() => UserTeam, userTeam => userTeam.team)
-    public user_teams!: UserTeam[]
+    @OneToMany(() => UserTeam, userTeam => userTeam.team, { cascade: true })
+    user_teams: UserTeam[]
 }
 
 export default Team

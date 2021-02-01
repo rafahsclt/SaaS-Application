@@ -5,21 +5,34 @@ import User from '../../models/User'
 import Team from '../../models/Team'
 
 const DatabaseSeed = async () => {
-    const userRepository = getRepository(User)
-    const teamRepository = getRepository(Team)
+    const usersRepository = getRepository(User)
+    const teamsRepository = getRepository(Team)
 
-    const data = await userRepository.find()
+    const data = await usersRepository.find()
 
-    if(data.length === 0) {
-        await userRepository.insert([
+    if (data.length === 0) {
+        const userData = usersRepository.create(
             { name: 'Rafael Leonen', password: '121212', email: 'rafah.sclt@gmail.com' }
-        ])
+        )
 
-        const user = await userRepository.findOne({ where: { name: 'Rafael Leonen' }})
+        await usersRepository.save(userData)
 
-        await teamRepository.insert([
-            { name: 'Round Dev', slug: slug('Round Dev'), user_id: user.id }
-        ])
+        const user = await usersRepository.findOne({ where: { name: 'Rafael Leonen' } })
+
+        const user_teams = [{
+            user_id: user.id
+        }]
+
+        const teamData = teamsRepository.create(
+            {
+                name: 'Round Dev',
+                slug: slug('Round Dev'),
+                user: user,
+                user_teams: user_teams
+            }
+        )
+
+        await teamsRepository.save(teamData)
     }
 }
 

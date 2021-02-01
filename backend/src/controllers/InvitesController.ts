@@ -8,7 +8,7 @@ class InvitesController {
         try {
             const { invites } = request.body
             const user_id = request.user.id 
-            const team_id = '8a9d58bc-d6bf-4ab8-a456-c71ecf13b28d'
+            const team_id = request.team.id
     
             const inviteToTeam = new InviteToTeamService()
     
