@@ -1,8 +1,8 @@
 import { getRepository } from 'typeorm'
 import slug from 'slug'
 
-import User from 'models/User'
-import Team from 'models/Team'
+import User from '../../models/User'
+import Team from '../../models/Team'
 
 const DatabaseSeed = async () => {
     const userRepository = getRepository(User)
@@ -15,8 +15,10 @@ const DatabaseSeed = async () => {
             { name: 'Rafael Leonen', password: '121212', email: 'rafah.sclt@gmail.com' }
         ])
 
+        const user = await userRepository.findOne({ where: { name: 'Rafael Leonen' }})
+
         await teamRepository.insert([
-            { name: 'Round Dev', slug: slug('Round Dev') }
+            { name: 'Round Dev', slug: slug('Round Dev'), user_id: user.id }
         ])
     }
 }

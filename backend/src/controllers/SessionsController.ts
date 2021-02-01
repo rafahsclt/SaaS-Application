@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 
 
-import AuthenticateUserService from 'services/AuthenticateUserService'
+import AuthenticateUserService from '../services/AuthenticateUserService'
 
 class SessionsController {
     public async create(request: Request, response: Response) {

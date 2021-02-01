@@ -1,14 +1,15 @@
 import { Request, Response } from 'express'
 
-import CreateTeamService from 'services/CreateTeamService'
-import ShowTeamService from 'services/ShowTeamService'
-import UpdateTeamService from 'services/UpdateTeamService'
-import DeleteTeamService from 'services/DeleteTeamService'
+import CreateTeamService from '../services/CreateTeamService'
+import ShowTeamService from '../services/ShowTeamService'
+import UpdateTeamService from '../services/UpdateTeamService'
+import DeleteTeamService from '../services/DeleteTeamService'
 
 class TeamsController {
     public async create(request: Request, response: Response) {
         try {
-            const { user_id, name, slug } = request.body
+            const user_id = request.user.id
+            const { name, slug } = request.body
     
             const createTeam = new CreateTeamService()
     
